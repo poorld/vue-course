@@ -9,7 +9,17 @@ const getters = {
 }
 
 const actions = {
+    /**
+     * state指向当前state实例
+     * rootState 指向根实例
+     */
+    updateUserName: ({ commit, state, rootState, dispatch }) => {
+        //
+        dispatch('xxx');
+    },
+    xxx () {
 
+    }
 }
 
 const mutations = {
@@ -21,5 +31,9 @@ export default {
     state,
     actions,
     getters,
-    mutations
+    mutations,
+    // 可以在模块中使用子模块
+    modules: {
+
+    }
 }
