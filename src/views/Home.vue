@@ -11,7 +11,7 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
-import axios from 'axios'
+import { getJadeInfo } from '@/api/user.js'
 
 export default {
   name: 'home',
@@ -45,7 +45,7 @@ export default {
     },
     methods: {
         handleInfo () {
-            axios.get('/test/who', { userId: 21 }).then(res => {
+            getJadeInfo().then(res => {
                 console.log(res);
             });
         },
