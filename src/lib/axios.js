@@ -13,7 +13,7 @@ class HttpRequest {
      */
     getInsideConfig () {
         const config = {
-            baseUrl: this.baseUrl,
+            baseURL: this.baseUrl,
             headers: {
                 //
             }
@@ -39,7 +39,7 @@ class HttpRequest {
         })
         // 响应拦截 及服务端返回时的拦截
         instance.interceptors.response.use(res => {
-            console.log(`响应拦截 ${JSON.stringify(res)}`);
+            // console.log(`响应拦截 ${JSON.stringify(res)}`);
             // 成功响应了就从队列中去除该url
             delete this.queue[url];
             const { data, status } = res;

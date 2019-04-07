@@ -1,10 +1,14 @@
 <template>
   <div class="home">
-      <h1>{{ food }}</h1>
+    <h1>{{ food }}</h1>
+    <div>
+        <img :src="url" alt="">
+        <img :src="url64" alt="">
+    </div>
     <button @click="handleClick">返回上一页</button>
     <button @click="push">push</button>
     <button @click="replace">替换</button>
-    <button @click="handleInfo">请求数据</button>
+    <button @click="handleInfo" :style="{ backgroundColor: color}">请求数据</button>
   </div>
 </template>
 
@@ -22,6 +26,13 @@ export default {
       food: {
           type: String,
           default: 'apple'
+      }
+  },
+  data () {
+      return {
+          url: '',
+          url64: '',
+          color: ''
       }
   },
     beforeRouteEnter (to, from, next) {
@@ -45,8 +56,11 @@ export default {
     },
     methods: {
         handleInfo () {
-            getJadeInfo().then(res => {
-                console.log(res);
+            getJadeInfo({ userId: 23 }).then(res => {
+                this.url = res.data.image;
+                this.url64 = res.data.img_base64;
+                this.color = res.data.color;
+                console.log(res.data);
             });
         },
          handleClick () {
@@ -79,3 +93,6 @@ export default {
     }
 }
 </script>
+
+<style>
+</style>

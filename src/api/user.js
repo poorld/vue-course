@@ -1,8 +1,11 @@
 import axios from './index'
 
-export const getJadeInfo = () => {
+export const getJadeInfo = ({ userId }) => {
     return axios.request({
-        url: 'http://localhost:8080/test/who',
-        method: 'get'
+        url: '/test/who',
+        method: 'get',
+        data: {
+            userId
+        }
     })
 }
