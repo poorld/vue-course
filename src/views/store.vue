@@ -1,7 +1,14 @@
 <template>
     <div>
-        <a-input @input="handleInput"/>
-        <a-show :content="value"></a-show>
+        <div>
+            <p>非model的vuex双向数据绑定</p>
+            <a-input :value="stateValue" @input="handleInputStateValue"/>
+        </div>
+        <div>
+            <p>model的vuex双向数据绑定</p>
+            <a-input v-model="stateValue"/>
+        </div>
+        <a-show :content="stateValue"></a-show>
         <p>{{ inputValueLastLetter }}</p>
         <p>{{ appName }}</p>
         <p>{{ userName }} -> {{ firstLetter }}</p>
@@ -52,7 +59,7 @@ export default {
             userName: state => state.user.userName,
             appVersion: state => state.appVersion,
             todoList: state => state.todo ? state.todo.todoList : [],
-            todoListInUser: state => state.user.todo ? state.user.todo.todoList : []
+            todoListInUser: state => state.user.todo ? state.user.todo.todoList : [],
         }),
         ...mapGetters([
             'appNameWithVersion',
@@ -64,17 +71,29 @@ export default {
         inputValueLastLetter () {
             // 返回value的最后一个字符
             return this.value.charAt(this.value.length - 1);
+        },
+        stateValue: {
+            get () {
+                return this.$store.state.stateValue;
+            },
+            set (newStatevalue) {
+                this.handleInputStateValue(newStatevalue);
+            }
         }
     },
     methods: {
         ...mapMutations([
-            'SET_APP_NAME'
+            'SET_APP_NAME',
+            "SET_STATE_NAME"
         ]),
         ...mapActions([
             'updateAppName'
         ]),
         handleInput (val) {
             this.value = val;
+        },
+        handleInputStateValue (newStatevalue) {
+            this.SET_STATE_NAME({ newStatevalue });
         },
         handleChangeAppName () {
             // 1
@@ -94,7 +113,7 @@ export default {
             this.updateAppName();
         },
         changeUserName () {
-            this.$store.dispatch('updateAppName', ['123', '1233']);
+            this.$store.dispatch('updateUserName', 'sss jade');
         },
         registerModule () {
             // 该方法与在文件中注册一个数组是一样的
@@ -110,8 +129,8 @@ export default {
             this.$store.registerModule(['user', 'todo'], {
                 state: {
                     todoList: [
-                        '学习mutations',
-                        '学习actions'
+                        'user 命名空间下的 学习mutations',
+                        'user 命名空间下的 学习actions'
                     ]
                 }
             });

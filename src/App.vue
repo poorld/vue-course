@@ -11,6 +11,7 @@
         <router-view name="email" key="email"/>
         <router-view name="tel" key="tel"/>
     </transition-group>
+    <button @click="handleClear">clear</button>
   </div>
 </template>
 
@@ -28,6 +29,11 @@ export default {
             if(to.query && to.query.transitionName) {
                 this.routerTransition = to.query.transitionName;
             }
+        }
+    },
+    methods: {
+        handleClear () {
+            localStorage.clear();
         }
     }
 }

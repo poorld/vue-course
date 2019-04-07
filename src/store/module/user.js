@@ -13,9 +13,10 @@ const actions = {
      * state指向当前state实例
      * rootState 指向根实例
      */
-    updateUserName: ({ commit, state, rootState, dispatch }) => {
+    updateUserName: ({ commit, state, rootState, dispatch }, userName) => {
+        console.log(JSON.stringify(userName))
         //
-        dispatch('xxx');
+        commit('SET_USER_NAME', { userName });
     },
     xxx () {
 
@@ -23,7 +24,9 @@ const actions = {
 }
 
 const mutations = {
-
+    SET_USER_NAME (state, { userName }) {
+        state.userName = userName;
+    }
 }
 
 export default {

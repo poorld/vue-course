@@ -11,6 +11,9 @@ const mutation = {
     },
     SET_APP_VERSION (state) {
         vue.set(state, 'appVersion', 'v2.0');
+    },
+    SET_STATE_NAME (state, { newStatevalue }) {
+        state.stateValue = newStatevalue;
     }
 }
 export default mutation;
