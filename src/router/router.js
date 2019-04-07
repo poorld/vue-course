@@ -45,6 +45,12 @@ export default [
             title: '关于'
         }
     },
+    {
+        path: '/count-to',
+        name: 'count-to',
+        component: () => import('../../src/views/count-to.vue')
+
+    },
     // 动态路由匹配
     {
 
