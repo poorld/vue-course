@@ -4,12 +4,14 @@
     <button @click="handleClick">返回上一页</button>
     <button @click="push">push</button>
     <button @click="replace">替换</button>
+    <button @click="handleInfo">请求数据</button>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
+import axios from 'axios'
 
 export default {
   name: 'home',
@@ -42,6 +44,11 @@ export default {
         }
     },
     methods: {
+        handleInfo () {
+            axios.get('/test/who', { userId: 21 }).then(res => {
+                console.log(res);
+            });
+        },
          handleClick () {
             // 返回上一页
             // this.$router.go(-1);

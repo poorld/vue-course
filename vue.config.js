@@ -1,4 +1,4 @@
-const BASE_URL = process.env.NODE_ENV === 'production' ? '/iview-admin' : "/";
+const BASE_URL = process.env.NODE_ENV === 'production' ? '/' : "/";
 const path = require('path');
 const resolve = dir => path.join(__dirname, dir);
 
@@ -15,7 +15,15 @@ module.exports = {
   productionSourceMap: false,
   // 跨域
   devServer: {
+      port: '8088',
       // 对于任何没有匹配到静态文件的任何请求都代理到proxy路径
-      proxy: 'http://localhost:4000'
+      proxy: {
+          '/test': {
+            target: 'http://localhost:8080',
+            ws: false, // 代理webSocket
+            // 将主机标头的原点更改为目标URL
+            changeOrigin: true
+          }
+      }
   }
 }
